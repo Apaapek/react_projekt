@@ -2,7 +2,7 @@ import React from 'react';
 
 const FormField = ({ label, name, value, onChange, error }) => {
   return (
-    <div>
+    <div className="formInput">
       <label htmlFor={name}>{label}</label><br />
       <input
         type="text"

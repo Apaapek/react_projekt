@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../../redux/authActions';
 import FormField from '../FormField';
-
+import { validateUsername, validateName, validatePassword, validateWeight, validateAge, validateHeight, validateGoal, validateGender, validateActivityLevel } from '../Validator';
+import "./FormComponent.css";
 const FormComponent = () => {
   const navigation = useNavigate();
   const dispatch = useDispatch();
@@ -22,9 +23,22 @@ const FormComponent = () => {
 
   const passwordPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,30}$/;
 
+  const [errors, setErrors] = useState({});
+
   const validateForm = () => {
-    // Add your form validation logic here
-    return true;
+    const newErrors = {};
+    newErrors.username = validateUsername(formData.username);
+    newErrors.name = validateName(formData.name);
+    newErrors.password = validatePassword(formData.password);
+    newErrors.weight = validateWeight(formData.weight);
+    newErrors.height = validateHeight(formData.height);
+    newErrors.age = validateAge(formData.age);
+    newErrors.goal = validateGoal(formData.goal);
+    newErrors.gender = validateGender(formData.gender);
+    newErrors.activity_level = validateActivityLevel(formData.activity_level);
+
+    setErrors(newErrors);
+    return Object.values(newErrors).every(err => err === '');
   };
 
   const onSubmit = async (e) => {
@@ -64,7 +78,7 @@ const FormComponent = () => {
           name="username"
           value={formData.username}
           onChange={handleChange}
-          error={isSubmitted && !formData.username ? 'Nazwa użytkownika jest wymagana' : null}
+          error={isSubmitted && errors.username}
         />
 
         <FormField
@@ -73,11 +87,7 @@ const FormComponent = () => {
           value={formData.password}
           onChange={handleChange}
           error={
-            isSubmitted &&
-            !formData.password
-              ? 'Hasło powinno mieć długość od 8 do 30 znaków oraz zawierać przynajmniej 1 wielką literę, 1 cyfrę oraz 1 znak specjalny'
-              : null
-          }
+            isSubmitted && errors.password}
         />
 
         <FormField
@@ -85,7 +95,7 @@ const FormComponent = () => {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          error={isSubmitted && !formData.name ? 'Imię jest wymagane' : null}
+          error={isSubmitted && errors.name}
         />
 
         <FormField
@@ -93,7 +103,7 @@ const FormComponent = () => {
           name="weight"
           value={formData.weight}
           onChange={handleChange}
-          error={isSubmitted && !formData.weight ? 'Waga jest wymagana' : null}
+          error={isSubmitted && errors.weight}
         />
 
         <FormField
@@ -101,7 +111,7 @@ const FormComponent = () => {
           name="height"
           value={formData.height}
           onChange={handleChange}
-          error={isSubmitted && !formData.height ? 'Wzrost jest wymagany' : null}
+          error={isSubmitted && errors.height}
         />
 
         <FormField
@@ -109,7 +119,7 @@ const FormComponent = () => {
           name="age"
           value={formData.age}
           onChange={handleChange}
-          error={isSubmitted && !formData.age ? 'Wiek jest wymagany' : null}
+          error={isSubmitted && errors.age}
         />
 
         <label htmlFor="goal">Cel</label><br />
@@ -162,10 +172,10 @@ const FormComponent = () => {
           onChange={handleChange}
         >
           <option value="niski">niski poziom aktywności</option>
-          <option value="lekki">lekki poziom aktywności -> 1-3 treningi/tydzień</option>
-          <option value="umiarkowany">umiarkowany poziom aktywności -> 3-5 treningów/tydzień</option>
-          <option value="wysoki">wysoki poziom aktywności -> 6-7 treningów/tydzień</option>
-          <option value="ultra">najwyższy poziom aktywności -> 2 treningi/dzień lub praca fizyczna</option>
+          <option value="lekki">lekki poziom aktywności - 1-3 treningi/tydzień</option>
+          <option value="umiarkowany">umiarkowany poziom aktywności - 3-5 treningów/tydzień</option>
+          <option value="wysoki">wysoki poziom aktywności - 6-7 treningów/tydzień</option>
+          <option value="ultra">najwyższy poziom aktywności - 2 treningi/dzień lub praca fizyczna</option>
         </select>
         {isSubmitted && !formData.activity_level && (
           <div style={{ color: 'red' }}>Musisz wybrać poziom aktywności</div>
@@ -174,9 +184,9 @@ const FormComponent = () => {
         <br />
 
         <input type="submit" value="Zarejestruj" id="btn" />
-        {isSubmitted && !validateForm() && (
-          <div style={{ color: 'red' }}>Poprawnie uzupełnij wszystkie pola</div>
-        )}
+        {isSubmitted && Object.values(errors).some(error => error) && (
+  <div style={{ color: 'red' }}>Poprawnie uzupełnij wszystkie pola</div>
+)}
       </form>
     </div>
   );
