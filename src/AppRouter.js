@@ -7,6 +7,7 @@ import MealComponent from './components/meal/MealComponent';
 // import HomeComponent from './path-to-components/HomeComponent';
 // import DayViewComponent from './path-to-components/DayViewComponent';
 import { useSelector } from 'react-redux';
+import DayViewComponent from './components/dayView/DayViewComponent';
 
 // const PrivateRoute = ({ component: Component, ...rest }) => {
 //   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -31,6 +32,7 @@ const AppRouter = () => {
         <Route path="/day-view" component={DayViewComponent} /> */}
         <Route path='/' element={<LoginComponent />} exact />
         <Route path='/meals' element={<MealComponent />} exact />
+        <Route path='/dayview' element={<DayViewComponent/>} exact />
       </Routes>
     </Router>
   );
