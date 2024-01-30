@@ -21,7 +21,7 @@ const HomeComponent = () => {
   const [weightCategory, setWeightCategory] = useState('');
   const [goalCalories,setgoalCalories] = useState('');
   const [userTDEE,setUserTDEE] = useState('');
-  const [userAge,setUserAge] = useState(user ? user. : '');
+  const [userAge,setUserAge] = useState(user ? user.age : '');
   const [dailyCalories,setDailyCalories] = useState('');
   const navigate = useNavigate();
 
