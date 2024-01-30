@@ -74,9 +74,10 @@ const HomeComponent = () => {
           </div>
           <div className='calendar'>
             <h3>Plan najbliższych posiłków: </h3>
-            <label>Wybierz datę: </label>
+            <label for="data" >Wybierz datę: </label>
             <input
               type="date"
+              id="data"
               value={selectedDate.toISOString().split('T')[0]} // Set the input value to the selected date
               onChange={handleDateChange}
             />

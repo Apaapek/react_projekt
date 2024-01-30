@@ -148,7 +148,7 @@ const FormComponent = () => {
           checked={formData.gender === 'm'}
           onChange={handleChange}
         />
-        mężczyzna
+        <label for="male">mężczyzna</label>
         <input
           type="radio"
           id="female"
@@ -157,7 +157,8 @@ const FormComponent = () => {
           checked={formData.gender === 'k'}
           onChange={handleChange}
         />
-        kobieta
+        <label for='female'>kobieta</label>
+        
         {isSubmitted && !formData.gender && (
           <div style={{ color: 'red' }}>Musisz wybrać płeć</div>
         )}
