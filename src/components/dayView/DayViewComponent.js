@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { MEALS } from '../../data/mock/meals.data';
 import { nutritionType } from '../../data/enums/nutritionType.enum.ts';
 import './DayViewComponent.css';
+// import { useRoute } from '@react-navigation/native';
 
 const DayView = () => {
 const [meals, setMeals] = useState([]);
@@ -13,6 +14,8 @@ const [meals, setMeals] = useState([]);
   const [nutrients] = useState(Object.values(nutritionType));
   const [ingredients, setIngredients] = useState(['']);
 
+  // const route = useRoute();
+  // const { itemId, itemName } = route.params;
 
 useEffect(() => {
     setMeals(MEALS);
@@ -64,6 +67,11 @@ const toggleShow = (meal) => {
               <li key={index}>{nutritional.type}: {nutritional.value}</li>
             ))}
           </ul>
+
+          <div>
+          {/* Item ID: {itemId}
+          Item Name: {itemName} */}
+          </div>
         </div>
       )}
   

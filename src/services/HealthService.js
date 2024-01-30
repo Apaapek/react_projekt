@@ -10,7 +10,7 @@ const calculateBMI = (weight, height) => {
 };
 
 const calculateBMR = (gender, weight, height, age) => {
-  height /= 100; // Convert height to meters if in cm
+  //height /= 100; // Convert height to meters if in cm
   return gender === 'm'
       ? 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
       : 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
@@ -25,7 +25,7 @@ const calculateTDEE = (activity, gender, weight, height, age) => {
       'wysoki': 1.725,
       'ultra': 1.9
   };
-  return bmr * (activityScales[activity] || 1);
+  return parseFloat((bmr * (activityScales[activity] || 1)).toFixed(2));
 };
 
 const calculatePercentage = (calories, goalCalories, tdee) => {

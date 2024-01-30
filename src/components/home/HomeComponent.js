@@ -6,6 +6,8 @@ import {useNavigate} from 'react-router-dom';
 import './HomeComponent.css';
 import {calculateBMI, calculateGoal, calculateTDEE, categorizeWeight} from '../../services/HealthService';
 import  bmiCategory  from "../../data/enums/bmiCategory.enum.ts";
+import DayCalendar from '../DayCalendar.js';
+
 const HomeComponent = () => {
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
@@ -14,8 +16,8 @@ const HomeComponent = () => {
   const [tempGoal, setTempGoal] = useState(user ? user.goal : '');
   const [tempHeight, setTempHeight] = useState(user ? user.height : '');
   const [tempWeight, setTempWeight] = useState(user ? user.weight : '');
-  const [tempActivity, setTempActivity] = useState(user ? user.activityLevel : '');
-  const [tempGender,setTempGender] = useState(user ? user.tempGender : '');
+  const [tempActivity, setTempActivity] = useState(user ? user.activity_level : '');
+  const [tempGender,setTempGender] = useState(user ? user.gender : '');
   const [ingredients, setIngredients] = useState([]);
   const [bmi, setBMI] = useState('');
   const [weightCategory, setWeightCategory] = useState('');
@@ -24,6 +26,7 @@ const HomeComponent = () => {
   const [userAge,setUserAge] = useState(user ? user.age : '');
   const [dailyCalories,setDailyCalories] = useState('');
   const navigate = useNavigate();
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
     const calculatedBMI = calculateBMI(tempWeight, tempHeight);
@@ -47,6 +50,11 @@ const HomeComponent = () => {
   };
   
 
+  const handleDateChange = (event) => {
+    // Handle date change, set the selectedDate state accordingly
+    const newDate = new Date(event.target.value);
+    setSelectedDate(newDate);
+  };
 
   return (
     <div>
@@ -62,7 +70,18 @@ const HomeComponent = () => {
             
             <p>Twój wskaźnik BMI wynosi: {bmi} </p>
             <p>co umiejscawia cię w kategorii:{weightCategory}</p>
-            <p>Uwzględniając Twój poziom aktywności , aby {tempGoal}, potrzebujesz przyjmować {userAge} kalorii dziennie</p>
+            <p>Uwzględniając Twój poziom aktywności , aby {tempGoal}, potrzebujesz przyjmować {dailyCalories} kalorii dziennie</p>
+          </div>
+          <div className='calendar'>
+            <h3>Plan najbliższych posiłków: </h3>
+            <label>Wybierz datę: </label>
+            <input
+              type="date"
+              value={selectedDate.toISOString().split('T')[0]} // Set the input value to the selected date
+              onChange={handleDateChange}
+            />
+
+            <DayCalendar date={selectedDate} />
           </div>
         </div>
       ) : (
