@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Router, Route, Routes } from 'react-router-dom';
+import DayView from './dayView/DayViewComponent';
 // import { useNavigation } from '@react-navigation/native';
 
 const DayCalendar = ({ date }) => {
-  // Format the date as you desire (this is just an example)
   const formattedDate = new Date(date).toLocaleDateString('pl-PL', {
     weekday: 'long',
     year: 'numeric',
@@ -26,6 +26,14 @@ const DayCalendar = ({ date }) => {
       {/* <p>{formattedDate}</p> */}
       {/* <Link to={`/day/${formattedDate.day}`}>{formattedDate}</Link> */}
       {/* <button onPress={() => handleItemPress(1, 'Item 1')}></button> */}
+      {/* <Link to={`/details/${formattedDate}`}> */}
+      <Link to={`/dayview`}>
+        <button>Go to DayView</button>
+      </Link>
+      <Routes>
+        {/* <Route path="/details/:selectedDate" element={<DayView />} /> */}
+        <Route path='/dayview'></Route>
+      </Routes>
     </div>
   );
 };

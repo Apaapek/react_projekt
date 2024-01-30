@@ -23,6 +23,7 @@ import HomeComponent from './components/home/HomeComponent';
 //   );
 // };
 
+
 const AppRouter = () => {
   return (
     <Router>

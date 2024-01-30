@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../redux/authSlice'; // Update the path as necessary
-import { Link } from 'react-router-dom'; // If using React Router for navigation
+import { logout } from '../../redux/authSlice';
+import { Link } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import './HomeComponent.css';
 import {calculateBMI, calculateGoal, calculateTDEE, categorizeWeight} from '../../services/HealthService';
@@ -31,7 +31,7 @@ const HomeComponent = () => {
   useEffect(() => {
     const calculatedBMI = calculateBMI(tempWeight, tempHeight);
     setBMI(calculatedBMI);
-    const category = categorizeWeight(calculatedBMI); // Use calculatedBMI directly
+    const category = categorizeWeight(calculatedBMI);
     setWeightCategory(category);
     const goalCaloriesValue = calculateGoal(tempGoal);
     setgoalCalories(goalCaloriesValue);
@@ -44,14 +44,14 @@ const HomeComponent = () => {
   const handleLogout = () => {
     dispatch(logout());
     navigate('/login');
-    // Navigate to login page, adjust as necessary
+
 
 
   };
   
 
   const handleDateChange = (event) => {
-    // Handle date change, set the selectedDate state accordingly
+
     const newDate = new Date(event.target.value);
     setSelectedDate(newDate);
   };
@@ -63,8 +63,7 @@ const HomeComponent = () => {
           <div className="topPanel">
             <h1>Witaj {user.name}!</h1>
             <p>Twój cel to: {tempGoal}</p>
-            <a className="logout" onClick={handleLogout} href="/login">[wyloguj]</a>
-            {/* Display other user details */}
+            {/* details */}
           </div>
           <div className="bodyDetails">
             
@@ -78,16 +77,18 @@ const HomeComponent = () => {
             <input
               type="date"
               id="data"
-              value={selectedDate.toISOString().split('T')[0]} // Set the input value to the selected date
+              value={selectedDate.toISOString().split('T')[0]}
               onChange={handleDateChange}
             />
 
             <DayCalendar date={selectedDate} />
           </div>
+          <a className="logout" onClick={handleLogout} href="/login">[wyloguj]</a>
         </div>
       ) : (
         <p>No user data available</p>
       )}
+      
     </div>
   );
 };

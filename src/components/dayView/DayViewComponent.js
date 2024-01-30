@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// Assuming similar data and enum files exist in the React app's structure
 import { MEALS } from '../../data/mock/meals.data';
 import { nutritionType } from '../../data/enums/nutritionType.enum.ts';
 import './DayViewComponent.css';
@@ -7,7 +6,7 @@ import './DayViewComponent.css';
 
 const DayView = () => {
 const [meals, setMeals] = useState([]);
-  const [currentDate] = useState(new Date()); // No setter needed if date doesn't change
+  const [currentDate] = useState(new Date());
   const [showTrue, setShowTrue] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [isNew, setIsNew] = useState(false);
@@ -32,7 +31,7 @@ const toggleShow = (meal) => {
   
   const addNew = () => {
     setIsNew(!isNew);
-    console.log(nutrients); // For demonstration, similar to Angular's method
+    console.log(nutrients);
   };
   
   const onIngredientChange = (index) => {
@@ -77,7 +76,7 @@ const toggleShow = (meal) => {
   
       {isNew && (
         <div className="addNew">
-          {/* Input fields and other JSX similar to the Angular template */}
+          {/* inputs */}
         </div>
       )}
     </div>
