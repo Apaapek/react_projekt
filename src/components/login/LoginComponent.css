@@ -1,0 +1,4 @@
+.hiddenLabel {
+    position: absolute !important;
+    overflow: hidden;
+  }

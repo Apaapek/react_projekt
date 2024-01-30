@@ -40,6 +40,7 @@ const LoginComponent = () => {
     <div className="form">
       <h1>Zaloguj się</h1>
       <form onSubmit={onSubmit}>
+        <label for="username" className='hiddenLabel'>username</label>
         <input
           type="text"
           id="username"
@@ -48,6 +49,7 @@ const LoginComponent = () => {
           onChange={(e) => setFormData({ ...formData, username: e.target.value })}
         />
         <br />
+        <label for="password" className='hiddenLabel'>username</label>
         <input
           type="password"
           id="password"
